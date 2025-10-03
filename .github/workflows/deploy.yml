@@ -78,7 +78,7 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: /plugin.medyayazilimlari.com
+          server-dir: /plugin.medyayazilimlari.com/
           
           # Hariç Tutulanlar: (Gizli dosyalar, .git ve .github)
           exclude: |
