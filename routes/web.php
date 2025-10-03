@@ -35,7 +35,7 @@ Route::get('/get-panel-info/{domain}', [App\Http\Controllers\PanelController::cl
 Route::get('/get-information', [App\Http\Controllers\SecureController::class, 'getInformation'])->withoutMiddleware(['auth']);
 Route::post('/reader-info', [App\Http\Controllers\PanelController::class, 'postReaderInfo'])->withoutMiddleware(['auth']);
 
-Route::prefix('secure')->group(function () {
+Route::prefix('/')->group(function () {
 
     Route::get('/', [App\Http\Controllers\SecureController::class, 'index'])->name('secure.index');
     
