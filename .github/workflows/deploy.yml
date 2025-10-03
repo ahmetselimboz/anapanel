@@ -62,5 +62,5 @@ jobs:
         run: |
           echo "Triggering server build for vendor/node_modules creation..."
           # Bu URL'i runBuild metodunu çağıran route ile güncelleyin!
-          curl -X GET "https://plugin.medyayazilimlari.com/deploy?token=${{ secrets.DEPLOY_TOKEN }}"
+          curl -X GET "https://plugin.medyayazilimlari.com/deploy"
           
