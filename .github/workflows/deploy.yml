@@ -43,7 +43,7 @@ jobs:
       - name: Install Composer Dependencies 
         if: env.SHOULD_BUILD == 'true'
         run: |
-          composer install --prefer-dist --no-dev --optimize-autoloader
+            composer install --no-scripts
 
       # ----------------------------------------------------
       # 5. Node.js Ortamını Kur
