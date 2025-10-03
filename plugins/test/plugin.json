@@ -1,0 +1,33 @@
+{
+    "name": "test",
+    "title": "Test",
+    "description": "<p>test<br \/>\r\n<br \/>\r\ntesttttttt<br \/>\r\n<br \/>\r\n<strong>sdfasfasdf<\/strong><\/p>",
+    "version": "1.0.0",
+    "author": "test",
+    "service_provider": null,
+    "dependencies": [],
+    "menu": {
+        "main": {
+            "title": "Test",
+            "icon": "fa fa-cube",
+            "route": "test.index"
+        },
+        "submenu": [
+            {
+                "title": "Ana Sayfa",
+                "icon": "fa fa-home",
+                "route": "test.index"
+            },
+            {
+                "title": "Ayarlar",
+                "icon": "fa fa-cog",
+                "route": "test.settings"
+            }
+        ]
+    },
+    "settings": {
+        "title": "Test",
+        "description": "<p>test<\/p>",
+        "custom_settings": []
+    }
+}

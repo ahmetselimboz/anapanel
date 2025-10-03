@@ -1,0 +1,8 @@
+font klasörü ve style.css dosyası
+public/frontend/assets/css içerisine
+
+mbg.png
+public/frontend/assets/images içerisine
+
+script.js ve script-home.js dosyaları
+public/frontend/assets/js içerisine

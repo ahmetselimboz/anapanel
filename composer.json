@@ -1,0 +1,90 @@
+{
+    "name": "laravel/laravel",
+    "type": "project",
+    "description": "The skeleton application for the Laravel framework.",
+    "keywords": [
+        "Haber Sitesi",
+        "VMG Haber"
+    ],
+    "license": "MIT",
+    "version": "1.0",
+    "require": {
+        "php": "^8.2",
+        "bacon/bacon-qr-code": "^3.0",
+        "google/apiclient": "^2.18",
+        "guzzlehttp/guzzle": "^7.0",
+        "intervention/image": "^2.7",
+        "joelbutcher/laravel-facebook-graph": "^1.4",
+        "jorenvanhocht/laravel-share": "*",
+        "laravel/framework": "^10.10",
+        "laravel/sanctum": "^3.2",
+        "laravel/socialite": "^5.18",
+        "laravel/tinker": "^2.8",
+        "laravel/ui": "^4.2",
+        "league/glide": "^2.3",
+        "mobiledetect/mobiledetectlib": "^4.8",
+        "pragmarx/google2fa": "^8.0",
+        "spatie/laravel-activitylog": "^4.7",
+        "spatie/laravel-analytics": "^5.5",
+        "yoeunes/toastr": "^2.3"
+    },
+    "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.13",
+        "fakerphp/faker": "^1.9.1",
+        "laravel/pint": "^1.0",
+        "laravel/sail": "^1.18",
+        "mockery/mockery": "^1.4.4",
+        "nunomaduro/collision": "^7.0",
+        "phpunit/phpunit": "^10.1",
+        "spatie/laravel-ignition": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "App\\Plugins\\SeoAnalyzer\\": "plugins/seo-analyzer/src/",
+            "App\\Plugins\\OrnekPlugin\\": "plugins/ornek-plugin/src/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/",
+            "App\\Plugins\\5LiReklam\\": "plugins/5-li-reklam/src/"
+        },
+        "files": [
+            "app/custom_helpers.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover --ansi"
+        ],
+        "post-update-cmd": [
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
+        ],
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "@php artisan key:generate --ansi"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": []
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "php-http/discovery": true
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}

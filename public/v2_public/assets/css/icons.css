@@ -1,0 +1,316 @@
+
+/***** ICONS ****/
+.icon-search-bx{
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+    background-image: url(../images/bxsearch.svg);
+    width: 20px;
+    height: 20px;
+    display: block;
+    content: ' ';
+    margin: 8px 0;
+}
+
+.icon-close{
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+    background-image: url(../images/close.svg);
+    width: 20px;
+    height: 20px;
+    display: block;
+    content: ' ';
+    margin: 0;
+}
+
+.icon-close2{
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+    background-image: url(../images/close2.svg);
+    width: 20px;
+    height: 20px;
+    display: block;
+    content: ' ';
+    margin: 0;
+}
+
+
+.icon-currency-up{
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-image: url(../images/currency-up.svg);
+    width: 10px;
+    height: 10px;
+    display: block;
+    content: ' ';
+    margin: 6px 10px;
+}
+
+.icon-currency-down{
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-image: url(../images/currency-down.svg);
+    width: 10px;
+    height: 10px;
+    display: block;
+    content: ' ';
+    margin: 6px 10px;
+}
+
+.icon-search{
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+    background-image: url(../images/search.svg);
+    width: 30px;
+    height: 20px;
+    display: block;
+    content: ' ';
+    margin: 8px 0;
+}
+
+.icon-user{
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+    background-image: url(../images/user.svg);
+    width: 30px;
+    height: 20px;
+    display: block;
+    content: ' ';
+    margin: 8px 0;
+}
+
+.icon-menu{
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+    background-image: url(../images/menu.svg);
+    width: 20px;
+    height: 20px;
+    display: block;
+    content: ' ';
+    margin: 8px 0;
+}
+
+.icon-social-x{
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+    background-image: url(../images/social-x.svg);
+    width: 24px;
+    height: 20px;
+    display: block;
+    content: ' ';
+    margin: 8px 0;
+}
+
+.icon-social-facebook{
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+    background-image: url(../images/social-facebook.svg);
+    width: 24px;
+    height: 20px;
+    display: block;
+    content: ' ';
+    margin: 8px 0;
+}
+
+.icon-social-instagram{
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+    background-image: url(../images/social-instagram.svg);
+    width: 24px;
+    height: 20px;
+    display: block;
+    content: ' ';
+    margin: 8px 0;
+}
+
+.icon-social-youtube{
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+    background-image: url(../images/social-youtube.svg);
+    width: 24px;
+    height: 20px;
+    display: block;
+    content: ' ';
+    margin: 8px 0;
+}
+
+.icon-social-youtube-new{
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+    background-image: url(../images/social-youtube-new.svg);
+    width: 24px;
+    height: 20px;
+    display: block;
+    content: ' ';
+    margin: 8px 0;
+}
+
+.video-play-icon{
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-image: url(../images/video-play.svg);
+    width: 54px;
+    height: 54px;
+    display: block;
+    content: ' ';
+}
+
+.gallery-image-icon{
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-image: url(../images/image-icon.svg);
+    width: 54px;
+    height: 54px;
+    display: block;
+    content: ' ';
+}
+
+.paginetion-prev{
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-image: url(../images/pagination-prev.svg);
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    content: ' ';
+}
+
+.paginetion-next{
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-image: url(../images/pagination-next.svg);
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    content: ' ';
+}
+
+.thumbs-up{
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-image: url(../images/pagination-next.svg);
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    content: ' ';
+}
+
+.google-news{
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-image: url(../images/gnews.svg);
+    content: ' ';
+}
+.whatsapp{
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-image: url(../images/whatsapp.svg);
+    content: ' ';
+}
+.facebook{
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-image: url(../images/facebook.svg);
+    content: ' ';
+}
+.x-corp{
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-image: url(../images/xcorp.svg);
+    content: ' ';
+}
+.copy-paste{
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-image: url(../images/copy.svg);
+    content: ' ';
+}
+
+.thumbs-up{
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-image: url(../images/thumbs-up.svg);
+    width: 14px;
+    height: 14px;
+    display: inline-block;
+    content: ' ';
+}
+
+.thumbs-down{
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-image: url(../images/thumbs-down.svg);
+    width: 14px;
+    height: 14px;
+    display: inline-block;
+    content: ' ';
+}
+
+.reply{
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-image: url(../images/reply.svg);
+    width:14px;
+    height: 14px;
+    display: inline-block;
+    content: ' ';
+}
+
+.comment-show{
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+    background-image: url(../images/comment-show.svg);
+    width:10px;
+    height: 12px;
+    display: inline-block;
+    content: ' ';
+}
+
+.curret-right{
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+    background-image: url(../images/breadcrumb.svg);
+    width:6px;
+    height: 9px;
+    display: inline-block;
+    content: ' ';
+    margin-right: 5px;
+}
+
+.modal-close{
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+    background-image: url(../images/modal-close.svg);
+    width:29px;
+    height: 29px;
+    display: block;
+    content: ' ';
+}

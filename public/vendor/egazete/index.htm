@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Lider Gazete - Antalya - e-Gazete</title>
+    <link id="favicon" rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="../ajax/libs/jquery/1.8.3/jquery.js"></script>
+    <script src="../ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+
+    <script src="js/flipbook.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="css/flipbook.style.css">
+    <link rel="stylesheet" type="text/css" href="css/flipbook.skin.black.css">
+    <script>
+        ! function() {
+            var t = document.createElement("script");
+            t.setAttribute("src", 'https://cdn.p.analitik.bik.gov.tr/tracker' + (typeof Intl !== "undefined" ? (typeof(Intl || "").PluralRules !== "undefined" ? '1' : typeof Promise !== "undefined" ? '2' : typeof MutationObserver !== 'undefined' ? '3' : '4') : '4') + '.js'), t.setAttribute("data-website-id", "747cb4ac-4c54-4d8f-9d42-6f138794fa01"), t.setAttribute("data-host-url", '//747cb4ac-4c54-4d8f-9d42-6f138794fa01.collector.p.analitik.bik.gov.tr'), document.head.appendChild(t)
+        }();
+    </script>
+    <!-- Google tag (gtag.js) -->
+    <script async="" src="../gtag/js?id=UA-174183794-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-174183794-1');
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var book1 = $("#container").flipBook({
+                pages: [{
+                    src: "https://www.lidergazete.com/uploads/gazete/20250425sayfa1.jpg",
+                    thumb: "https://www.lidergazete.com/uploads/gazete/20250425sayfa1.jpg",
+                    title: "Anasayfa"
+                }, {
+                    src: "https://www.lidergazete.com/uploads/gazete/20250425sayfa2.jpg",
+                    thumb: "https://www.lidergazete.com/uploads/gazete/20250425sayfa2.jpg",
+                    title: "Sayfa 2"
+                }, {
+                    src: "https://www.lidergazete.com/uploads/gazete/20250425sayfa3.jpg",
+                    thumb: "https://www.lidergazete.com/uploads/gazete/20250425sayfa3.jpg",
+                    title: "Sayfa 3"
+                }, {
+                    src: "https://www.lidergazete.com/uploads/gazete/20250425sayfa4.jpg",
+                    thumb: "https://www.lidergazete.com/uploads/gazete/20250425sayfa4.jpg",
+                    title: "Sayfa 4"
+                }, {
+                    src: "https://www.lidergazete.com/uploads/gazete/20250425sayfa5.jpg",
+                    thumb: "https://www.lidergazete.com/uploads/gazete/20250425sayfa5.jpg",
+                    title: "Sayfa 5"
+                }, {
+                    src: "https://www.lidergazete.com/uploads/gazete/20250425sayfa6.jpg",
+                    thumb: "https://www.lidergazete.com/uploads/gazete/20250425sayfa6.jpg",
+                    title: "Sayfa 6"
+                }, {
+                    src: "https://www.lidergazete.com/uploads/gazete/20250425sayfa7.jpg",
+                    thumb: "https://www.lidergazete.com/uploads/gazete/20250425sayfa7.jpg",
+                    title: "Sayfa 7"
+                }, {
+                    src: "https://www.lidergazete.com/uploads/gazete/20250425sayfa8.jpg",
+                    thumb: "https://www.lidergazete.com/uploads/gazete/20250425sayfa8.jpg",
+                    title: "Sayfa 8"
+                }],
+
+                //menu
+                btnNext: true,
+                btnPrev: true,
+                btnZoomIn: true,
+                btnZoomOut: true,
+                btnToc: false,
+                btnThumbs: false,
+                btnShare: false,
+                btnExpand: false,
+
+                startPage: 0,
+
+                pageWidth: 1000,
+                pageHeight: 1694,
+                thumbnailWidth: 100,
+                thumbnailHeight: 169,
+
+                flipType: '3d',
+
+                time1: 500,
+                time2: 600
+
+            });
+
+        })
+    </script>
+
+</head>
+
+<body>
+
+    <div id="container" style=""></div>
+</body>
+
+</html>
