@@ -15,8 +15,6 @@ jobs:
         run: php -r "file_exists('.env') || copy('.env.example', '.env');"
       - name: Install Dependencies
         run: composer update --no-scripts
-   
-
       - name: Directory Permissions
         run: chmod -R 777 storage bootstrap/cache
       - name: 📂 Sync files
@@ -26,3 +24,16 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           server-dir: /plugin.medyayazilimlari.com/
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/vendor/**
+            **/public/**
+            **/tests/**
+            **/phpunit.xml
+            **/.env.example
+            **/deploy.yml
+            **/*.md
+            **/.github/**
+          
