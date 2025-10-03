@@ -21,6 +21,8 @@ Route::get('robots.txt', function() {
 });
 Route::get('aktar-te', [App\Http\Controllers\AktarController::class, 'aktarte'])->name('aktarte');
 Route::get('bakim-modu', [App\Http\Controllers\HomeController::class, 'maintenance'])->name('frontend.maintenance');
+Route::get('/deploy', [App\Http\Controllers\DeploymentController::class, 'runBuild']);
+
 Auth::routes();
 
 Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'login'])->middleware('throttle:5,1');

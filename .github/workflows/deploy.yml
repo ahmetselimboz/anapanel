@@ -1,94 +1,73 @@
-name: Laravel CI/CD to cPanel (Hyper-Speed Optimized)
+name: Laravel CI/CD to cPanel (MAX SPEED - ZIP TRANSFER)
 
 on:
   push:
     branches:
-      - main # Kod itme olaylarını bu dal için tetikle
+      - main 
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     
-    # Commit mesajında [build] ifadesi varsa ya da ilk defa çalışıyorsa True olur.
-    # Bu değişkeni, sonradan koşul (if) bloklarında kullanacağız.
+    # Commit mesajında [build] ifadesi varsa True olur.
     env:
       SHOULD_BUILD: ${{ contains(github.event.head_commit.message, '[build]') }}
       
     steps:
-      # 1. Kodu Çek
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      # ----------------------------------------------------
-      # 2. PHP Ortamını Kur
-      # ----------------------------------------------------
-      - name: Setup PHP Environment
+      # ----------------- BUILD AŞAMASI (SADECE [build] VARSA) -----------------
+
+      - name: Setup PHP and Node.js (If Build Required)
+        if: env.SHOULD_BUILD == 'true'
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.2'
-          extensions: mbstring, pdo_mysql, bcmath, fileinfo
-          tools: composer, phpunit
+          extensions: mbstring, pdo_mysql, bcmath
+          tools: composer
 
-      # 3. Composer Önbellekleme (Cache)
-      # vendor klasörünü hashFiles('composer.lock') değişmediği sürece önbellekten yükler.
-      - name: Cache Composer Dependencies
-        uses: actions/cache@v4
-        with:
-          path: vendor
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: ${{ runner.os }}-composer-
-
-      # 4. Composer Kurulumu (Koşullu Çalıştırma)
-      # SADECE commit mesajında [build] varsa bu adım çalışır.
-      - name: Install Composer Dependencies 
-        if: env.SHOULD_BUILD == 'true'
-        run: |
-            composer install --no-scripts
-
-      # ----------------------------------------------------
-      # 5. Node.js Ortamını Kur
-      # ----------------------------------------------------
-      - name: Setup Node.js Environment
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      # 6. NPM Önbellekleme (Cache)
-      # node_modules klasörünü package-lock.json değişmediği sürece önbellekten yükler.
-      - name: Cache Node Modules
-        uses: actions/cache@v4
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: ${{ runner.os }}-npm-
-
-      # 7. NPM Kurulumu ve Derleme (Koşullu Çalıştırma)
-      # SADECE commit mesajında [build] varsa bu adımlar çalışır.
-      - name: Install NPM & Build Frontend 
+      - name: Install Composer & NPM Dependencies
         if: env.SHOULD_BUILD == 'true'
         run: |
           npm install
-          npm run build # Frontend varlıklarını public klasörüne derler
+          composer install --no-scripts
 
-      # 8. Optimized FTP Deploy (Sync Mode)
-      # Bu adım HER ZAMAN çalışır. Vendor ve node_modules sadece değiştiyse gönderilir.
-      - name: Optimized FTP Deploy to cPanel (Sync Mode)
+      - name: Build Frontend Assets
+        if: env.SHOULD_BUILD == 'true'
+        run: npm run build
+
+      - name: Compress Build Files to ZIP
+        if: env.SHOULD_BUILD == 'true'
+        run: |
+          # SADECE vendor, node_modules ve public klasörlerini sıkıştırır
+          zip -r deployment_assets.zip vendor node_modules public 
+          
+      # ----------------- TRANSFER AŞAMASI -----------------
+
+      - name: Optimized FTP Deploy (Sync Source Code & ZIP)
         uses: SamKirkland/FTP-Deploy-Action@v4.3.0
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
+          protocol: sftp 
           server-dir: /plugin.medyayazilimlari.com/
           
-          # Hariç Tutulanlar: (Gizli dosyalar, .git ve .github)
+          # vendor, node_modules ve public klasörlerini ZIP dosyası yerine göndermemek için hariç tutarız
+          # Ancak deployment_assets.zip dosyasının hariç tutulmadığından emin olun!
           exclude: |
             .git
             .github
             .DS_Store
+            .env
+            /vendor/** /node_modules/** /public/** # Public klasörünü de ZIP'e dahil ettik
             
-            
-      # 9. Sunucudaki Artisan Komutlarını Tetikle (Migration, Cache vb.)
-      # Dağıtım bittikten sonra HER ZAMAN çalışır.
-    #   - name: Trigger Artisan Commands (Migrations/Cache)
-    #     run: |
-    #       curl -X GET "https://alanadiniz.com/otomatik-dağıtım-tetikleyicisi-gizli-token?token=${{ secrets.DEPLOY_TOKEN }}"
+
+      # ----------------- SUNUCUDA ÇALIŞTIRMA AŞAMASI -----------------
+
+      - name: Trigger Server Unzip & Artisan Commands
+        run: |
+          echo "Triggering server commands..."
+          # Bu URL, sunucudaki PHP scriptinizi çağırır.
+          curl -X GET "https://plugin.medyayazilimlari.com/deploy?token=${{ secrets.DEPLOY_TOKEN }}"
