@@ -37,7 +37,7 @@ Route::post('/reader-info', [App\Http\Controllers\PanelController::class, 'postR
 
 Route::prefix('/')->group(function () {
 
-    Route::get('/', [App\Http\Controllers\SecureController::class, 'index'])->name('secure.index');
+    //Route::get('/', [App\Http\Controllers\SecureController::class, 'index'])->name('secure.index');
     
     // Plugin Yönetimi Route'ları
     // require __DIR__ . '/admin.php';
@@ -105,7 +105,7 @@ Route::prefix('/')->group(function () {
 
     
     
-    Route::get('/panels', [App\Http\Controllers\PanelController::class, 'index'])->name('panels.index');
+    Route::get('/', [App\Http\Controllers\PanelController::class, 'index'])->name('panels.index');
     Route::get('/panels/create', [App\Http\Controllers\PanelController::class, 'createPage'])->name('panel.create.page');
     Route::post('/panels/create', [App\Http\Controllers\PanelController::class, 'create'])->name('panel.create');
     Route::get('/panels/delete/{slug}', [App\Http\Controllers\PanelController::class, 'delete'])->name( 'panel.delete');
