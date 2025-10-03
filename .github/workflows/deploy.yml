@@ -26,7 +26,7 @@ jobs:
         if: env.SHOULD_BUILD == 'true'
         run: |
           npm install
-          composer install --prefer-dist --no-dev --optimize-autoloader
+          composer install --no-scripts
 
       - name: Build Frontend Assets
         if: env.SHOULD_BUILD == 'true'
