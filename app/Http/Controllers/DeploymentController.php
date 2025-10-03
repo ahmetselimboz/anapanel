@@ -49,7 +49,7 @@ class DeploymentController extends Controller
             // 2. TEMİZLEME ve ZIP'TEN ÇIKARMA (Vendor/Node_modules/Public)
             
             // Önceki vendor ve node_modules'ü kaldırıyoruz.
-            $results['clean_up'] = $this->runCommand('rm -rf vendor node_modules public/build');
+            $results['clean_up'] = $this->runCommand('rm -rf vendor node_modules public');
 
             // deployment_assets.zip dosyasını sunucuda açma.
             // Bu adım, vendor, node_modules ve public klasörlerini yerlerine yerleştirir.
