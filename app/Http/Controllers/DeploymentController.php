@@ -4,34 +4,52 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Artisan;
 
 class DeploymentController extends Controller
 {
-    private function runCommand(string $command): string
+    /**
+     * Güvenli dosya/klasör silme
+     */
+    private function deletePath($path)
     {
-        // SQL veya diğer enjeksiyonları önlemek için kritik güvenlik adımı
-        $safeCommand = escapeshellcmd($command);
-        
-        // shell_exec() yerine exec() kullanmak daha iyi olabilir, 
-        // ancak shell_exec() tüm çıktıyı yakalar.
-        $output = shell_exec($safeCommand . ' 2>&1'); // Hata ve çıktıyı yakalar
-        
-        Log::info("Command executed: {$safeCommand}");
-        Log::info("Output: {$output}");
-        
-        return $output;
+        if (is_dir($path)) {
+            // Klasörü recursive sil
+            $files = new \RecursiveIteratorIterator(
+                new \RecursiveDirectoryIterator($path, \FilesystemIterator::SKIP_DOTS),
+                \RecursiveIteratorIterator::CHILD_FIRST
+            );
+
+            foreach ($files as $file) {
+                $file->isDir() ? rmdir($file->getRealPath()) : unlink($file->getRealPath());
+            }
+            rmdir($path);
+        } elseif (is_file($path)) {
+            unlink($path);
+        }
+    }
+
+    /**
+     * ZIP dosyasını güvenli şekilde açma
+     */
+    private function unzipFile($zipFile, $extractTo)
+    {
+        $zip = new \ZipArchive;
+        if ($zip->open($zipFile) === true) {
+            $zip->extractTo($extractTo);
+            $zip->close();
+            return "Zip başarıyla açıldı.";
+        } else {
+            return "Zip açılamadı.";
+        }
     }
 
     /**
      * Dağıtım ve Build komutlarını sunucuda çalıştıran ana metot.
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
      */
     public function runBuild(Request $request)
     {
-        // 1. GÜVENLİK KONTROLÜ (KRİTİK!)
-        // DEPLOY_TOKEN_FROM_ENV değeri .env dosyanızda olmalıdır.
+        // 1. GÜVENLİK KONTROLÜ
         if ($request->token !== env('DEPLOY_TOKEN_FROM_ENV')) {
             Log::warning('Yetkisiz dağıtım denemesi.');
             abort(403, 'Yetkisiz erişim: Geçersiz token.');
@@ -41,29 +59,30 @@ class DeploymentController extends Controller
             'status' => 'Dağıtım Başladı',
             'timestamp' => now()->toDateTimeString(),
         ];
-        
-        // Sunucu kök dizininde çalıştığımızdan emin olmak için
-        chdir(base_path());
 
         try {
-            // 2. TEMİZLEME ve ZIP'TEN ÇIKARMA (Vendor/Node_modules/Public)
-            
-            // Önceki vendor ve node_modules'ü kaldırıyoruz.
-            $results['clean_up'] = $this->runCommand('rm -rf vendor node_modules public');
+            // 2. TEMİZLEME
+            $this->deletePath(base_path('vendor'));
+            $this->deletePath(base_path('node_modules'));
+            // !!! public komple silinmiyor !!!
+            $results['clean_up'] = "vendor ve node_modules silindi.";
 
-            // deployment_assets.zip dosyasını sunucuda açma.
-            // Bu adım, vendor, node_modules ve public klasörlerini yerlerine yerleştirir.
-            $results['unzip'] = $this->runCommand('unzip -o deployment_assets.zip');
-            
-            // 3. LARAVEL KOMUTLARI
-            
-            // Veritabanı güncellemeleri
-            $results['artisan_migrate'] = $this->runCommand('php artisan migrate --force');
+            // 3. ZIP'ten çıkarma
+            $results['unzip'] = $this->unzipFile(
+                base_path('deployment_assets.zip'),
+                base_path()
+            );
 
-            // Cache temizleme ve optimizasyon
-            $results['artisan_cache_clear'] = $this->runCommand('php artisan cache:clear');
-            $results['artisan_config_cache'] = $this->runCommand('php artisan config:cache');
-            
+            // 4. ARTISAN KOMUTLARI (PHP içinden)
+            Artisan::call('migrate', ['--force' => true]);
+            $results['artisan_migrate'] = Artisan::output();
+
+            Artisan::call('cache:clear');
+            $results['artisan_cache_clear'] = Artisan::output();
+
+            Artisan::call('config:cache');
+            $results['artisan_config_cache'] = Artisan::output();
+
             $results['status'] = 'Dağıtım ve Build Başarıyla Tamamlandı.';
 
         } catch (\Exception $e) {

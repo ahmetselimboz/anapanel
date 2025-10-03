@@ -7,16 +7,37 @@ jobs:
   web-deploy:
     name: Deploy
     runs-on: ubuntu-latest
+      # Commit mesajında [build] ifadesi varsa True olur.
+    env:
+      SHOULD_BUILD: ${{ contains(github.event.head_commit.message, '[build]') }}
+        
     steps:
-      - name: Get the latest code
+      - name: Checkout Code
         uses: actions/checkout@v4
-      - uses: actions/setup-node@master
-      - name: Copy .env
-        run: php -r "file_exists('.env') || copy('.env.example', '.env');"
-      - name: Install Dependencies
-        run: composer update --no-scripts
-      - name: Directory Permissions
-        run: chmod -R 777 storage bootstrap/cache
+      - name: Setup PHP and Node.js (If Build Required)
+        if: env.SHOULD_BUILD == 'true'
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, pdo_mysql, bcmath
+          tools: composer
+
+      - name: Install Composer & NPM Dependencies
+        if: env.SHOULD_BUILD == 'true'
+        run: |
+          npm install
+          composer install --prefer-dist --no-dev --optimize-autoloader
+
+      - name: Build Frontend Assets
+        if: env.SHOULD_BUILD == 'true'
+        run: npm run build
+
+      - name: Compress Build Files to ZIP
+        if: env.SHOULD_BUILD == 'true'
+        run: |
+          # SADECE vendor, node_modules ve public klasörlerini sıkıştırır
+          zip -r deployment_assets.zip vendor node_modules public 
+          
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
@@ -29,7 +50,7 @@ jobs:
             **/.git*/**
             **/node_modules/**
             **/vendor/**
-            **/public/**
+            **/public/** 
             **/tests/**
             **/phpunit.xml
             **/.env.example
