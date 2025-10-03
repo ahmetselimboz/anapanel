@@ -51,7 +51,6 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          protocol: sftp 
           server-dir: /plugin.medyayazilimlari.com/
           
           # vendor, node_modules ve public klasörlerini ZIP dosyası yerine göndermemek için hariç tutarız
