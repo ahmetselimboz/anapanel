@@ -50,9 +50,18 @@ jobs:
             **/.git*/** 
             **/node_modules/** 
             **/vendor/** 
-            **/public/**
-            !public/.htaccess
-            !public/index.php
+            **/public/backend/**
+            **/public/build/**
+            **/public/cache/**
+            **/public/frontend/**
+            **/public/lider_bursa/**
+            **/public/resimler/**
+            **/public/sitemaps/**
+            **/public/uploads/**
+            **/public/v1_public/**
+            **/public/v2_public/**
+            **/public/v3_public/**
+            **/public/vendor/**
             **/tests/** 
             **/phpunit.xml 
             **/.env.example 
