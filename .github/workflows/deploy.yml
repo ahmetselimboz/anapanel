@@ -50,7 +50,7 @@ jobs:
             **/.git*/** 
             **/node_modules/** 
             **/vendor/** 
-            **/public/**
+            **/public/*/
             !public/.htaccess
             !public/index.php
             **/tests/** 
