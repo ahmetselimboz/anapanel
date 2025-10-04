@@ -10,7 +10,7 @@
                     <div class="col-lg-5 col-md-5 col-12">
                         <div class="bg-white rounded10 shadow-lg">
                             <div class="content-top-agile p-20 pb-0 mb-3">
-                                <h2 class="text-primary">Sisteme Giriş2</h2>
+                                <h2 class="text-primary">Sisteme Giriş</h2>
                             </div>
                             <div class="p-40">
                                 <form method="post" action="{{ route('login') }}">
