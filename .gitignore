@@ -1,25 +1,15 @@
-# Laravel / Node klasörleri
 /.phpunit.cache
 /node_modules
+/public
+!public/.htaccess
+!public/index.php
+/public/build
+/public/hot
+/public/storage
 /storage/*.key
 /vendor
-
-# Public altındaki TÜM klasörleri ignore et
-/public/*/
-
-# Ancak public içindeki dosyaları (örneğin index.php, .htaccess, favicon.ico) hariç tut
-!/public/*.*
-
-# Eğer bazı klasörleri özellikle dahil etmek istiyorsan (örnekler)
-#!public/uploads/
-#!public/sitemaps/
-
-# Ortam dosyaları
-.env
 .env.backup
 .env.production
-
-# IDE, test ve sistem dosyaları
 .phpunit.result.cache
 Homestead.json
 Homestead.yaml
@@ -29,3 +19,6 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+public/uploads
+public/sitemap
+public/sitemaps/

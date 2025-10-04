@@ -45,20 +45,19 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           server-dir: /main.panel/
-          exclude: |
-            **/.git*
-            **/.git*/**
-            **/node_modules/**
-            **/vendor/**
-            # public içindeki TÜM klasörleri hariç tut
-            **/public/*/
-            # Ancak public içindeki dosyaları dahil et (örneğin index.php, .htaccess)
-            !**/public/*.*
-            **/tests/**
-            **/phpunit.xml
-            **/.env.example
-            **/deploy.yml
-            **/*.md
+          exclude: | 
+            **/.git* 
+            **/.git*/** 
+            **/node_modules/** 
+            **/vendor/** 
+            **/public/**
+            !public/.htaccess
+            !public/index.php
+            **/tests/** 
+            **/phpunit.xml 
+            **/.env.example 
+            **/deploy.yml 
+            **/*.md 
             **/.github/**
 
       - name: Trigger Server Build Commands (Vendor/Node)
