@@ -18,8 +18,8 @@ jobs:
         if: env.SHOULD_BUILD == 'true'
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.2'
-          extensions: mbstring, pdo_mysql, bcmath
+          php-version: '8.3'
+          extensions: mbstring, pdo_mysql, bcmath, zip
           tools: composer
 
       - name: Install Composer & NPM Dependencies
@@ -44,13 +44,16 @@ jobs:
           server: ${{ secrets.FTP_SERVER}}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: /plugin.medyayazilimlari.com/
+          server-dir: /main.panel/
           exclude: |
             **/.git*
             **/.git*/**
             **/node_modules/**
             **/vendor/**
-            **/public/** 
+            # public içindeki TÜM klasörleri hariç tut
+            **/public/*/
+            # Ancak public içindeki dosyaları dahil et (örneğin index.php, .htaccess)
+            !**/public/*.*
             **/tests/**
             **/phpunit.xml
             **/.env.example
@@ -63,5 +66,5 @@ jobs:
         run: |
           echo "Triggering server build for vendor/node_modules creation..."
           # Bu URL'i runBuild metodunu çağıran route ile güncelleyin!
-          curl -X GET "https://plugin.medyayazilimlari.com/deploy"
+          curl -X GET "https://main.panel.medyayazilimlari.com/deploy"
           
