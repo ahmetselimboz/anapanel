@@ -51,6 +51,7 @@ jobs:
             **/node_modules/** 
             **/vendor/** 
             **/public/*/
+            public/backend/**
             !public/.htaccess
             !public/index.php
             **/tests/** 
